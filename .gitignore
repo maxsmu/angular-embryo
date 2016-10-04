@@ -1,0 +1,16 @@
+node_modules
+.idea
+.DS_Store
+.sass-cache/
+.history/
+dist/
+.git
+CVS
+.svn
+.hg
+.lock-wscript
+.wafpickle-N
+*.swp
+._*
+npm-debug.log
+.vscode
