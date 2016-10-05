@@ -2,13 +2,20 @@
  * @Author: maxsmu
  * @Date: 2016-10-04 15:58:31
  * @Last Modified by: maxsmu
- * @Last Modified time: 2016-10-04 17:01:53
+ * @Last Modified time: 2016-10-05 21:47:29
  * @GitHub: https://github.com/maxsmu
 */
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
+
+const webpack = require('webpack');
+const WebpackDevMiddleware = require('webpack-dev-middleware');
+const WebpackHotMiddleware = require('webpack-hot-middleware');
+
+const webpackConfig = require('./webpack.config-dev');
+const compiler = webpack(webpackConfig);
 
 const mockFileUrl = './mock';
 const app = express();
@@ -19,6 +26,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(express.static(__dirname));
+
+app.use(WebpackDevMiddleware(compiler, {
+	publicPath: webpackConfig.output.publicPath,
+	noInfo: false,
+	stats: {
+		colors: true,
+		cached: false
+	}
+}));
+app.use(WebpackHotMiddleware(compiler));
 
 const routers = getMockRouters();
 const router = express.Router();
