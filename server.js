@@ -2,7 +2,7 @@
  * @Author: maxsmu
  * @Date: 2016-10-04 15:58:31
  * @Last Modified by: maxsmu
- * @Last Modified time: 2016-10-05 21:47:29
+ * @Last Modified time: 2016-10-05 23:33:33
  * @GitHub: https://github.com/maxsmu
 */
 const express = require('express');
@@ -52,7 +52,7 @@ routers.forEach(config => {
 app.use(router);
 
 app.use((request, response, next) => {
-	response.sendStatues(404);
+	response.sendStatus(404);
 	next();
 });
 
@@ -61,8 +61,7 @@ app.use((request, response, next) => {
 // will print stacktrace
 if (app.get('env') === 'development') {
 	app.use((err, req, res, next) => {
-		res.status(err.status || 500);
-		res.send(err.message);
+		res.sendStatus(err.status || 500);
 	});
 }
 
