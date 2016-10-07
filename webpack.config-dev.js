@@ -2,7 +2,7 @@
  * @Author: maxsmu
  * @Date: 2016-10-04 19:34:23
  * @Last Modified by: maxsmu
- * @Last Modified time: 2016-10-05 21:54:06
+ * @Last Modified time: 2016-10-06 08:45:49
  * @GitHub: https://github.com/maxsmu
 */
 // webpack
@@ -25,6 +25,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // autoprefixer
 const autoprefixer = require('autoprefixer');
+
 const loaders = [
 	{
 		test: /\.js$/,
@@ -88,9 +89,9 @@ module.exports = {
 		publicPath: '/' // hot loader publish dir
 	},
 	externals: {
-		'angular': 'angular',
-		'angular-resource': '\'ngResource\'',
-		'angular-ui-router': '\'ui.router\''
+		// 'angular': 'angular',
+		// 'angular-resource': '\'ngResource\'',
+		// 'angular-ui-router': '\'ui.router\''
 	},
 	resolve: {
 		// 扩展名：在解析一个文件时，将会尝试附加这些文件扩展名。
@@ -107,25 +108,30 @@ module.exports = {
 		// 拷贝静态资源
 		new CopyWebpackPlugin([
 			{
-				from: __dirname + '/src/assets/images/static',
-				to: __dirname + '/build/assets/images/static'
-			},
-			{
 				from: __dirname + '/src/assets/lib',
 				to: __dirname + '/build/assets/lib'
+			},
+			{
+				from: __dirname + '/node_modules/oclazyload/dist/ocLazyLoad.min.js',
+				to: __dirname + '/build/assets/lib/ocLazyLoad.min.js'
+			},
+			{
+				from: __dirname + '/src/assets/images/static',
+				to: __dirname + '/build/assets/images/static'
 			}
 		]),
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
-			filename: './build/index.html',
-			inject: false
+			filename: './index.html',
+			title: 'angular1.X+ES2015',
+			inject: true
 		}),
 		// 分离CSS和JS文件
 		new ExtractTextPlugin('[name]-[hash].css'),
 		// 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.optimize.DedupePlugin(),
-		new webpack.HotModuleReplacementPlugin({ multiStep: true }),
+		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin()
 	],
 	module: {
