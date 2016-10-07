@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app" ng-controller="webappController as app">
 
 <head>
-	<title></title>
+	<title>app</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="css/style.css" rel="stylesheet">
+	<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+		<link rel="stylesheet" href="<%= htmlWebpackPlugin.files.chunks[chunk].css %>">
+		<% } %>
 </head>
 
-<body>
+<body ng-cloak>
+	{{app.name}}
 
+	<!--<% var i = 0; for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+		<script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" seq="<%= i++ %>"></script>
+	<% } %>-->
+	<script src="./assets/lib/ocLazyLoad.min.js"></script>
 </body>
 
 </html>
