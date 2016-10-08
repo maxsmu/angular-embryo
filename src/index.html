@@ -2,7 +2,7 @@
 <html lang="en" ng-app="app" ng-controller="webappController as app">
 
 <head>
-	<title>app</title>
+	<title></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
@@ -16,7 +16,6 @@
 	<!--<% var i = 0; for (var chunk in htmlWebpackPlugin.files.chunks) { %>
 		<script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" seq="<%= i++ %>"></script>
 	<% } %>-->
-	<script src="./assets/lib/ocLazyLoad.min.js"></script>
 </body>
 
 </html>

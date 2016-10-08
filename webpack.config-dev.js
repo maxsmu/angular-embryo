@@ -2,7 +2,7 @@
  * @Author: maxsmu
  * @Date: 2016-10-04 19:34:23
  * @Last Modified by: maxsmu
- * @Last Modified time: 2016-10-06 08:45:49
+ * @Last Modified time: 2016-10-08 17:29:10
  * @GitHub: https://github.com/maxsmu
 */
 // webpack
@@ -110,10 +110,6 @@ module.exports = {
 			{
 				from: __dirname + '/src/assets/lib',
 				to: __dirname + '/build/assets/lib'
-			},
-			{
-				from: __dirname + '/node_modules/oclazyload/dist/ocLazyLoad.min.js',
-				to: __dirname + '/build/assets/lib/ocLazyLoad.min.js'
 			},
 			{
 				from: __dirname + '/src/assets/images/static',
